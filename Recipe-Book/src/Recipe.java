@@ -55,7 +55,13 @@ public class Recipe implements Serializable {
 		return instructions;
 	}
 
-
-	
+	public String toString() {
+		String output = " ";
+		output += this.name;
+		output += this.description;
+		output += this.ingredients;
+		output += this.instructions;
+		return output;
+    }
 	
 }
