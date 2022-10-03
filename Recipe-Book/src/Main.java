@@ -68,7 +68,6 @@ public class Main {
 		 
 		 return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions); 
 		 
-		
 	}
 	
 	public static Recipe initializeRecipe3() {
