@@ -66,9 +66,14 @@ public class Recipe implements Serializable {
 		for (int i = 0; i < ingredients.size(); i++) {
 			output += this.ingredients + "\n";
 		} //end for
-				
-		output += this.instructions + "\n";
+			
+		output += "Recipe Instructions: "+ "\n";
+		//put instructions in a vertical list
+		for (int i = 0; i < instructions.size(); i++) {
+			output += this.instructions.get(i) + "\n";
+		}		
 		return output;
+
     }
 	
 }
