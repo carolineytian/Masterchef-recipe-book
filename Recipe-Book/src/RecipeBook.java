@@ -13,6 +13,7 @@ public class RecipeBook extends ArrayList<Recipe> implements Serializable {
 	
 	public void addRecipe(Recipe r) {
 		this.add(r); 
+		saveToDisk(r);
 	}
 	
 	public void saveToDisk(Recipe r){
