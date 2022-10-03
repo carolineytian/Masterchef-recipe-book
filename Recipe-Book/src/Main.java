@@ -25,8 +25,11 @@ public class Main {
 		 };
 		 ArrayList<String> instructions = new ArrayList<String>(){
 			 {
-				 add("Combine condensed milk, cocoa, and butter in a medium saucepan over medium heat. Cook and stir until thickened, about 10 minutes. Remove from heat and let rest until mixture is cool enough to handle.");
-				 add("Use your hands to shape into small balls and place on a serving plate. Can be eaten at once or chilled until serving.");
+				 add("Combine condensed milk, cocoa, and butter in a medium saucepan over medium heat.");
+				 add("Cook and stir until thickened, about 10 minutes.");
+				 add("Remove from heat and let rest until mixture is cool enough to handle.");
+				 add("Use your hands to shape into small balls and place on a serving plate.");
+				 add("Can be eaten at once or chilled until serving.");
 				 add("ENJOY!");
 			 }
 			 
@@ -50,15 +53,15 @@ public class Main {
 		 };
 		 ArrayList<String> instructions = new ArrayList<String>(){
 			 {
-				 add("Whisk the flour, salt, and baking powder together in a mixing bowl. "
-				 		+ "Mix in the lard with your fingers until the flour resembles cornmeal. "
-				 		+ "Add the water and mix until the dough comes together; "
-				 		+ "place on a lightly floured surface and knead a few minutes until smooth and elastic. D"
-				 		+ "ivide the dough into 24 equal pieces and roll each piece into a ball.");
-				 add("Preheat a large skillet over medium-high heat. "
-				 		+ "Use a well-floured rolling pin to roll a dough ball into a thin, round tortilla. P"
-				 		+ "lace into the hot skillet, and cook until bubbly and golden; flip and continue cooking until golden on the other side. "
-				 		+ "Place the cooked tortilla in a tortilla warmer; continue rolling and cooking the remaining dough.");
+				 add("Whisk the flour, salt, and baking powder together in a mixing bowl.");
+				 add("Mix in the lard with your fingers until the flour resembles cornmeal.");
+				 add("Add the water and mix until the dough comes together;");
+				 add("Place on a lightly floured surface and knead a few minutes until smooth and elastic.");
+				 add("Divide the dough into 24 equal pieces and roll each piece into a ball.");
+				 add("Preheat a large skillet over medium-high heat.");
+				 add("Use a well-floured rolling pin to roll a dough ball into a thin, round tortilla.");
+				 add("Place into the hot skillet, and cook until bubbly and golden; flip and continue cooking until golden on the other side.");
+				 add("Place the cooked tortilla in a tortilla warmer; continue rolling and cooking the remaining dough.");
 			 }
 			 
 		 };
@@ -85,9 +88,12 @@ public class Main {
 		 
 		 ArrayList<String> instructions = new ArrayList<String>(){
 			 {
-				 add("Bring a large pot of lightly salted water to a boil. Add pasta and cook until al dente, 8 to 10 minutes; drain.");
-				 add("Heat oil in a large skillet over medium heat. Sauté garlic until tender, then stir in chicken and season with red pepper flakes. Cook until chicken is golden and cooked through.");
-				 add("Combine pasta, chicken, pesto, and sun-dried tomatoes in a large bowl; toss to coat evenly.");
+				 add("Bring a large pot of lightly salted water to a boil.");
+				 add("Add pasta and cook until al dente, 8 to 10 minutes; drain.");
+				 add("Heat oil in a large skillet over medium heat.");
+				 add("Sauté garlic until tender, then stir in chicken and season with red pepper flakes.");
+				 add("Cook until chicken is golden and cooked through.");
+				 add("Combine pasta, chicken, pesto, and sun-dried tomatoes in a large bowl - toss to coat evenly.");
 			 }
 			 
 		 };
