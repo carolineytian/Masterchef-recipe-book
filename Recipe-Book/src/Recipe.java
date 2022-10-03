@@ -54,8 +54,26 @@ public class Recipe implements Serializable {
 	public ArrayList<String> getInstructions() {
 		return instructions;
 	}
-
-
 	
+	public String toString() {
+		String output = " ";
+		output += "\n";
+		output += "Recipe Name: " + this.name + "\n"; 
+		output += "Recipe Description: " + this.description + "\n";
+		
+		output += "Recipe Ingredients: "+ "\n";
+		//put ingredients in a vertical list
+		for (int i = 0; i < ingredients.size(); i++) {
+			output += this.ingredients + "\n";
+		} //end for
+			
+		output += "Recipe Instructions: "+ "\n";
+		//put instructions in a vertical list
+		for (int i = 0; i < instructions.size(); i++) {
+			output += this.instructions.get(i) + "\n";
+		}		
+		return output;
+
+    }
 	
 }
