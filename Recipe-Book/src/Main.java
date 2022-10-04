@@ -145,7 +145,8 @@ public class Main {
 			if (optionSearchBrowse == 1) {
 				System.out.print("Enter the name of the recipe: ");
 				recipeName = input.nextLine();
-				//searchRecipe(recipeName, mainBook);
+				searchRecipe(recipeName, mainBook);
+				break;
 			} //end of
 		
 			else if (optionSearchBrowse == 2) {
@@ -163,8 +164,27 @@ public class Main {
 			else {
 				System.out.println("Sorry, this choice is invalid. Please try again.");
 			} //end else
-		} //end while
-			
+		} //end while		
 
-	}
+	} //end public static void main
+
+	//method to search for a recipe in the array
+	public static void searchRecipe(String recipeName, RecipeBook mainBook) {
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Enter the name of the recipe: ");
+		recipeName = input.nextLine();
+		for (int i = 0; i < mainBook.size(); i++) {
+			//look through every index of the array to find the matched recipe name
+	    	if (mainBook.get(i).getName().equals(recipeName)) {
+	    		System.out.println("The recipe was found! Here it is: " + recipeName.toString());
+	    		//mainBook.get(i).toString();
+	   			break;
+	   		} //end if
+	    	else if (i == mainBook.size() - 1) {
+	    		System.out.println("Sorry, the recipe with that name was not found.");
+	    	} //end else
+	    } //end for
+	 } //end searchRecipe
 }
