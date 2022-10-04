@@ -90,7 +90,7 @@ public class Main {
 			
 		};
 		
-		return new Recipe("Pesto Pasta with Chicken", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions); 
+		return new Recipe("Test", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions); 
 		
 		
 	}
@@ -169,9 +169,9 @@ public class Main {
 		
 		System.out.println("Welcome to MasterChef Recipe Book!");
 		System.out.println("Select one option from the menu: \n"
-				+ "[1] 📖 View your Recipe Book \n"
+				+ "[1] 📖 View your ENTIRE Recipe Book \n"
 				+ "[2] 🍝 Add recipe(s) to your Recipe Book \n"
-				+ "[3] 🕶 Browse recipes. \n"
+				+ "[3] 🕶 Retrieve recipes by browsing or searching. \n"
 				+ "[4] ✌️ Exit out of MasterChef");
 		
 		int option = input.nextInt();
@@ -216,7 +216,11 @@ public class Main {
 				if (optionSearchBrowse == 1) {
 					System.out.println("Enter the name of the recipe: ");
 					recipeName = input.nextLine();
-					searchRecipe(recipeName, mainBook);
+					Recipe  r = searchRecipe(recipeName, mainBook);
+					if (r != null) {
+						System.out.println(r.toString());
+					}
+					
 					break;
 				} //end of
 			
@@ -248,23 +252,24 @@ public class Main {
 
 	
 	//method to search for a recipe in the array
-	public static void searchRecipe(String recipeName, RecipeBook mainBook) {
+	public static Recipe  searchRecipe(String recipeName, RecipeBook mainBook) {
 		
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Enter the name of the recipe: ");
-		recipeName = input.nextLine();
+		recipeName = input.nextLine().toLowerCase();
 		for (int i = 0; i < mainBook.size(); i++) {
 			//look through every index of the array to find the matched recipe name
-	    	if (mainBook.get(i).getName().equals(recipeName)) {
-	    		System.out.println("The recipe was found! Here it is: " + recipeName.toString());
-	    		mainBook.get(i).toString();
-	   			break;
+	    	if (mainBook.get(i).getName().toLowerCase().contains(recipeName)) {
+	    		System.out.println("The recipe was found! Here it is: ");
+	    		return mainBook.get(i);
 	   		} //end if
 	    	else if (i == mainBook.size() - 1) {
 	    		System.out.println("Sorry, the recipe with that name was not found.");
 	    	} //end else
-	    } //end for
+	    }
+		return null;
+		//end for
 	 } //end searchRecipe
 	
 
