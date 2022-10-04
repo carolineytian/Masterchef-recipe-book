@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 // class for commandline user interaction
 //Recipe(String name, String description, ArrayList<String> ingredients, ArrayList<String> instructions)
@@ -122,7 +123,48 @@ public class Main {
 		RecipeBook mainBook = initializeRecipeBook();
 		System.out.println(mainBook);
 		
+		//initialize variable
+		int optionSearchBrowse = 0;
+		String recipeName;
 		
+		System.out.println("Welcome to the Recipe Book recipes page!");
+		
+		Scanner input = new Scanner(System.in);
+	
+				
+		while (optionSearchBrowse != 3) {
+			
+			System.out.println("Would you like to ");
+			System.out.println("1: Search by recipe name");
+			System.out.println("2: Browse all recipes");
+			System.out.println("3: Quit");
+			System.out.print("Enter an option: ");
+			
+			optionSearchBrowse = input.nextInt();
+			
+			if (optionSearchBrowse == 1) {
+				System.out.print("Enter the name of the recipe: ");
+				recipeName = input.nextLine();
+				//searchRecipe(recipeName, mainBook);
+			} //end of
+		
+			else if (optionSearchBrowse == 2) {
+				System.out.println("Enter the name of the recipe: ");
+				recipeName = input.nextLine();
+				//browseRecipe(recipeName, mainBook);
+				break;
+			} //end else if
+			
+			else if (optionSearchBrowse == 3) {
+				System.out.println("Leaving Recipe Book recipes page");
+				break;
+			} //end else if
+			
+			else {
+				System.out.println("Sorry, this choice is invalid. Please try again.");
+			} //end else
+		} //end while
+			
 
 	}
 }
