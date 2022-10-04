@@ -169,10 +169,10 @@ public class Main {
 		
 		System.out.println("Welcome to MasterChef Recipe Book!");
 		System.out.println("Select one option from the menu: \n"
-				+ "[1] View your Recipe Book \n"
-				+ "[2] Add recipe(s) to your Recipe Book \n"
-				+ "[3] Browse recipes. \n"
-				+ "[4] Exit out of MasterChef");
+				+ "[1] 📖 View your Recipe Book \n"
+				+ "[2] 🍝 Add recipe(s) to your Recipe Book \n"
+				+ "[3] 🕶 Browse recipes. \n"
+				+ "[4] ✌️ Exit out of MasterChef");
 		
 		int option = input.nextInt();
 		
