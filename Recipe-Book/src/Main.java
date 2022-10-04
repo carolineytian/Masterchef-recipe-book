@@ -171,7 +171,8 @@ public class Main {
 		System.out.println("Select one option from the menu: \n"
 				+ "[1] View your Recipe Book \n"
 				+ "[2] Add recipe(s) to your Recipe Book \n"
-				+ "[3] Leave MasterChef. \n");
+				+ "[3] Browse recipes. \n"
+				+ "[4] Exit out of MasterChef");
 		
 		int option = input.nextInt();
 		
@@ -191,9 +192,10 @@ public class Main {
 	        	 if (more.equalsIgnoreCase("n")) {
 	        		 keepAdding = false;
 	        	 }
-
 	        }
-		/* else if (option == 3) {
+
+		}
+		else if (option == 3) {
 			
 			//initialize variable
 			int optionSearchBrowse = 0;
@@ -234,17 +236,17 @@ public class Main {
 					System.out.println("Sorry, this choice is invalid. Please try again.");
 				} //end else
 			} //end while
-		} //end else if
-		*/	
+			//end else if
+
 		} else {
 			System.exit(0);
 		}
-		
-	
-		
-	}
 
-	/*
+
+
+		}
+
+	
 	//method to search for a recipe in the array
 	public static void searchRecipe(String recipeName, RecipeBook mainBook) {
 		
@@ -264,7 +266,7 @@ public class Main {
 	    	} //end else
 	    } //end for
 	 } //end searchRecipe
-	*/
+	
 
 
 }
