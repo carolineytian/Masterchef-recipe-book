@@ -15,7 +15,7 @@ public class Recipe implements Serializable {
 		this.instructions = instructions;
 	} 
 	
-	// for testing
+	// for recipe additions
 	public Recipe(String name) {
 		this.name = name;
 	} 
@@ -64,7 +64,7 @@ public class Recipe implements Serializable {
 		output += "Recipe Ingredients: "+ "\n";
 		//put ingredients in a vertical list
 		for (int i = 0; i < ingredients.size(); i++) {
-			output += this.ingredients + "\n";
+			output += this.ingredients.get(i) + "\n";
 		} //end for
 			
 		output += "Recipe Instructions: "+ "\n";

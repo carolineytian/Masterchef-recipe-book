@@ -14,6 +14,7 @@ import java.util.*;
 
 public class Main {
 	// ignore the following, populating dummy recipes with lots of text to play around with 
+	// ------------------------------------------------------------------------------------------------------------------------------
 	
 	public static Recipe initalizeRecipe1() {
 
@@ -107,85 +108,97 @@ public class Main {
 		return rb;
 	}
 	
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	
+	public static ArrayList<String> askingUser(Scanner sc, String type) {
+		
+		System.out.println("Input your " + type + "s, " 
+				+ "\npressing ENTER after each " + type + ".\nWhen you've completed adding to your recipe, just press ENTER.");
+		
+		ArrayList<String> output = new ArrayList<String>(); 
+		int i = 1;
+		String input = "";
+		Boolean keepGoing = true;
+		
+		while (keepGoing) {
+			System.out.println("Enter " + type + " " + i + ": ");
+			input = sc.nextLine(); 
+			System.out.println(input);
+			if (input != "") {
+				output.add(input); 
+				i++; 
+			} else {
+				keepGoing = false;
+			}
+		}
+		
+		return output; 
+	}
+
+	
+	public static Recipe usersNewRecipe() {
+		// Using Tiffany's logic from previous implementation, with a slight update to allow for re-usability and minimize opportunity for error. 
+		
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Creating a new recipe...");
+		
+		
+		System.out.println("Recipe Name: ");
+		
+		String recipeName = sc.nextLine();
+		System.out.println("Recipe Description: ");
+		String recipeDescription = sc.nextLine();
+		
+		ArrayList<String>ingredients = askingUser(sc, "ingredient"); 
+		ArrayList<String> instructions = askingUser(sc, "instruction"); 
+		
+		
+		
+		
+		return new Recipe (recipeName, recipeDescription, ingredients, instructions); 
+	}
+
+
 	
 	
 	public static void main(String[] args) {
-		
 		RecipeBook mainBook = initializeRecipeBook();
-		System.out.println(mainBook);
-		int i=0;
-        Scanner myObj = new Scanner(System.in);  
-        while (i==0) {
-            ArrayList<String> ingredients = new ArrayList<>();
-            ArrayList<String> instructions = new ArrayList<>();
-
-            System.out.println("Create a recipe");
-            System.out.println("Recipe Name: ");
-            String recipeName = myObj.nextLine();
-            System.out.println("Recipe Description: ");
-            String recipeDescription = myObj.nextLine();
-			
-			//this is the new fuction but has an error for sc and also says void method cannot return a value. 
-			System.out.println("Enter the number of Ingredients to add: ");
-				int ingredientCount = Integer.parseInt(sc.nextLine());
-				for (int k = 0; k < ingredientCount; k++) {
-					System.out.println("Enter an ingredient: ");
-					ingredients.add(sc.nextLine());
-				}
-				return ingredients;
-			}
-			
-			//this is the function i originally had, but does not let me add more ingredients even if I send Y, but just moves on to instructions.
-            // System.out.println("Recipe Ingredients: ");
-            // int j=0;
-            // int count=1;
-            // while(j==0){
-            //     System.out.println("Please enter Ingredient "+ count);
-            //     String ing = myObj.nextLine();
-            //     ingredients.add(ing);
-            //     System.out.println("Enter more ingredients? Y/N");
-            //     String choice = myObj.next();
-            //     if (choice == "Y"){
-            //         continue;
-            //     }
-            //     else j=1;
-            // }
-
-			//add recipe instructions
-            System.out.println("Recipe Instructions: ");
-            int k=0;
-            int count_instructions=1;
-			//this function also needs to change based on the changes from above. So that users can add more than one instructions
-            while(k==0){
-                System.out.println("Please enter Instructions "+ count_instructions);
-                String ins = myObj.nextLine();
-                instructions.add(ins);
-                System.out.println("Enter more instructions? Y/N");
-                String choice = myObj.next();
-                if (choice == "Y"){
-                    continue;
-                }
-                else k=1;
-            }
-
-            RecipeBook recipebook = new RecipeBook(){ {
-				//this line keeps giving me an error, can you guys help me out with it?
-                addRecipe(new Recipe(recipeName, recipeDescription, ingredients, instructions));
-            }
-            };
-
-            //if above line x works, use this
-            // RecipeBook recipeBook2 = new RecipeBook();
-            // recipeBook2.addRecipe(recipeName, recipeDescription, ingredients, instructions);
-
-            System.out.println("Do you want to add another recipe? Y/N");
-            String choice = myObj.next();
-            if (choice=="Y"){
-                continue;
-            }
-            else i=1;
-        }
 		
+		Scanner input = new Scanner(System.in); 
+		
+		System.out.println("Welcome to MasterChef Recipe Book!");
+		System.out.println("Select one option from the menu: \n"
+				+ "[1] View your Recipe Book \n"
+				+ "[2] Add recipe(s) to your Recipe Book \n"
+				+ "[3] Leave MasterChef. \n");
+		
+		int option = input.nextInt();
+		
+		if (option == 1) {
+			System.out.println(mainBook);
+		} else if (option == 2) {
+			Scanner sc = new Scanner(System.in);
+			String more = "";
+			
+	        
+	        Boolean keepAdding = true;
+	        while (keepAdding) {
+	        	 Recipe newRecipe = usersNewRecipe(); 
+	        	 mainBook.add(newRecipe); 
+	        	 System.out.println("Would you like to add a new recipe? Y/N?");
+	        	 more = sc.next();
+	        	 if (more.equalsIgnoreCase("n")) {
+	        		 keepAdding = false;
+	        	 }
 
+	        }
+			
+		} else {
+			System.exit(0);
+		}
+		
+	
+		
 	}
 }
