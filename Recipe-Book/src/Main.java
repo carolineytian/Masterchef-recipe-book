@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.*;
 
 
 // class for commandline user interaction
@@ -123,25 +124,38 @@ public class Main {
             String recipeName = myObj.nextLine();
             System.out.println("Recipe Description: ");
             String recipeDescription = myObj.nextLine();
+			
+			//this is the new fuction but has an error for sc and also says void method cannot return a value. 
+			System.out.println("Enter the number of Ingredients to add: ");
+				int ingredientCount = Integer.parseInt(sc.nextLine());
+				for (int k = 0; k < ingredientCount; k++) {
+					System.out.println("Enter an ingredient: ");
+					ingredients.add(sc.nextLine());
+				}
+				return ingredients;
+			}
+			
+			//this is the function i originally had, but does not let me add more ingredients even if I send Y, but just moves on to instructions.
+            // System.out.println("Recipe Ingredients: ");
+            // int j=0;
+            // int count=1;
+            // while(j==0){
+            //     System.out.println("Please enter Ingredient "+ count);
+            //     String ing = myObj.nextLine();
+            //     ingredients.add(ing);
+            //     System.out.println("Enter more ingredients? Y/N");
+            //     String choice = myObj.next();
+            //     if (choice == "Y"){
+            //         continue;
+            //     }
+            //     else j=1;
+            // }
 
-            System.out.println("Recipe Ingredients: ");
-            int j=0;
-            int count=1;
-            while(j==0){
-                System.out.println("Please enter Ingredient "+ count);
-                String ing = myObj.nextLine();
-                ingredients.add(ing);
-                System.out.println("Enter more ingredients? Y/N");
-                String choice = myObj.next();
-                if (choice == "Y"){
-                    continue;
-                }
-                else j=1;
-            }
-
+			//add recipe instructions
             System.out.println("Recipe Instructions: ");
             int k=0;
             int count_instructions=1;
+			//this function also needs to change based on the changes from above. So that users can add more than one instructions
             while(k==0){
                 System.out.println("Please enter Instructions "+ count_instructions);
                 String ins = myObj.nextLine();
