@@ -25,7 +25,6 @@ public class Main {
 				add("3 tablespoons unsweetened cocoa");
 				add("1 tablespoon butter");
 			}
-			
 		};
 		ArrayList<String> instructions = new ArrayList<String>(){
 			{
@@ -34,9 +33,8 @@ public class Main {
 				add("ENJOY!");
 			}
 		};
-		
 		return new Recipe("Brigadeiros", "Yummy and simple Brazilian dessert.", ingredients, instructions); 
-	}
+	} //initializeRecipe1
 	
 	public static Recipe initializeRecipe2() {
 		// from https://www.allrecipes.com/recipe/157642/homemade-flour-tortillas/
@@ -63,9 +61,8 @@ public class Main {
 				 		+ "Place the cooked tortilla in a tortilla warmer; continue rolling and cooking the remaining dough.");
 			}
 		};
-		
 		return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions); 
-	}
+	} //initializeRecipe2
 	
 	public static Recipe initializeRecipe3() {
 		// from https://www.allrecipes.com/recipe/46982/pesto-pasta-with-chicken/
@@ -87,13 +84,9 @@ public class Main {
 				add("Heat oil in a large skillet over medium heat. Sauté garlic until tender, then stir in chicken and season with red pepper flakes. Cook until chicken is golden and cooked through.");
 				add("Combine pasta, chicken, pesto, and sun-dried tomatoes in a large bowl; toss to coat evenly.");
 			}
-			
 		};
-		
 		return new Recipe("Test", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions); 
-		
-		
-	}
+	} //end initializeRecipe3
 	
 	public static RecipeBook initializeRecipeBook() {
 		RecipeBook rb = new RecipeBook() {
@@ -104,9 +97,8 @@ public class Main {
 			}
 			
 		};
-		
 		return rb;
-	}
+	} //end initializeRecipeBook
 	
 	// ---------------------------------------------------------------------------------------------------------------------------------
 	
@@ -127,18 +119,18 @@ public class Main {
 			if (input != "") {
 				output.add(input); 
 				i++; 
-			} else {
+			} //end if
+			else {
 				keepGoing = false;
-			}
-		}
+			} //end else
+		} //end while keepGoing
 		
 		return output; 
-	}
+	} //end askingUser
 
 	
 	public static Recipe usersNewRecipe() {
 		// Using Tiffany's logic from previous implementation, with a slight update to allow for re-usability and minimize opportunity for error. 
-		
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Creating a new recipe...");
@@ -152,103 +144,102 @@ public class Main {
 		
 		ArrayList<String>ingredients = askingUser(sc, "ingredient"); 
 		ArrayList<String> instructions = askingUser(sc, "instruction"); 
-		
-		
-		
-		
+
 		return new Recipe (recipeName, recipeDescription, ingredients, instructions); 
 	}
 
 
-	
-	
 	public static void main(String[] args) {
 		RecipeBook mainBook = initializeRecipeBook();
 		
+		//initialize variable
+		int option = 0;
+		System.out.println("Welcome to MasterChef Recipe Book!");
+		
 		Scanner input = new Scanner(System.in); 
 		
-		System.out.println("Welcome to MasterChef Recipe Book!");
-		System.out.println("Select one option from the menu: \n"
-				+ "[1] 📖 View your ENTIRE Recipe Book \n"
-				+ "[2] 🍝 Add recipe(s) to your Recipe Book \n"
-				+ "[3] 🕶 Retrieve recipes by browsing or searching. \n"
-				+ "[4] ✌️ Exit out of MasterChef");
-		
-		int option = input.nextInt();
-		
-		if (option == 1) {
-			System.out.println(mainBook);
-		} else if (option == 2) {
-			Scanner sc = new Scanner(System.in);
-			String more = "";
+		while (option != 4) {
+			System.out.println("Select one option from the menu: \n"
+					+ "[1] 📖 View your ENTIRE Recipe Book \n"
+					+ "[2] 🍝 Add recipe(s) to your Recipe Book \n"
+					+ "[3] 🕶 Retrieve recipes by browsing or searching. \n"
+					+ "[4] ✌️ Exit out of MasterChef");
 			
-	        
-	        Boolean keepAdding = true;
-	        while (keepAdding) {
-	        	 Recipe newRecipe = usersNewRecipe(); 
-	        	 mainBook.add(newRecipe); 
+			option = input.nextInt();
+		
+			if (option == 1) {
+			  System.out.println(mainBook);
+			} //end if
+			else if (option == 2) {
+			  Scanner sc = new Scanner(System.in);
+			  String more = "";
+			
+	          Boolean keepAdding = true;
+	          while (keepAdding) {
+	        	Recipe newRecipe = usersNewRecipe(); 
+	        	mainBook.add(newRecipe); 
 	        	 System.out.println("Would you like to add a new recipe? Y/N?");
 	        	 more = sc.next();
 	        	 if (more.equalsIgnoreCase("n")) {
-	        		 keepAdding = false;
-	        	 }
-	        }
+	        		keepAdding = false;
+	        	 } //end if
+	          } //end while
 
-		}
-		else if (option == 3) {
+			} //end else if
+			else if (option == 3) {
 			
-			//initialize variable
-			int optionSearchBrowse = 0;
-			String recipeName;
-			
-			Scanner searchBrowse = new Scanner(System.in);
-			
-			while (optionSearchBrowse != 3) {
+				//initialize variable
+				int optionSearchBrowse = 0;
+				String recipeName;
 				
-				System.out.println("Would you like to ");
-				System.out.println("1: Search by recipe name");
-				System.out.println("2: Browse all recipes");
-				System.out.println("3: Quit");
-				System.out.print("Enter an option: ");
+				Scanner searchBrowse = new Scanner(System.in);
 				
-				optionSearchBrowse = input.nextInt();
+				while (optionSearchBrowse != 3) {
 				
-				if (optionSearchBrowse == 1) {
-					System.out.println("Enter the name of the recipe: ");
-					recipeName = input.nextLine();
-					Recipe  r = searchRecipe(recipeName, mainBook);
-					if (r != null) {
-						System.out.println(r.toString());
-					}
+					System.out.println("Would you like to ");
+					System.out.println("1: Search by recipe name");
+					System.out.println("2: Browse all recipes");
+					System.out.println("3: Quit");
+					System.out.print("Enter an option: ");
 					
-					break;
-				} //end of
+					optionSearchBrowse = input.nextInt();
+					
+					if (optionSearchBrowse == 1) {
+						//System.out.println("Enter the name of the recipe: ");
+						recipeName = input.nextLine();
+						Recipe  r = searchRecipe(recipeName, mainBook);
+						if (r != null) {
+							System.out.println(r.toString());
+						} //end if
+						
+						break;
+					} //end if
 			
-				else if (optionSearchBrowse == 2) {
-					System.out.println("Enter the name of the recipe: ");
-					recipeName = input.nextLine();
-					//browseRecipe(recipeName, mainBook);
-					break;
-				} //end else if
-				
-				else if (optionSearchBrowse == 3) {
-					System.out.println("Leaving Recipe Book recipes page");
-					break;
-				} //end else if
-				
-				else {
-					System.out.println("Sorry, this choice is invalid. Please try again.");
-				} //end else
-			} //end while
-			//end else if
-
-		} else {
-			System.exit(0);
-		}
-
-
-
-		}
+					else if (optionSearchBrowse == 2) {
+						System.out.println("Enter the name of the recipe: ");
+						recipeName = input.nextLine();
+						//browseRecipe(recipeName, mainBook);
+						break;
+					} //end else if
+					
+					else if (optionSearchBrowse == 3) {
+						System.out.println("Leaving Recipe Book recipes page");
+						break;
+					} //end else if
+					
+					else {
+						System.out.println("Sorry, this choice is invalid. Please try again.");
+					} //end else
+				} //end while
+			} //end else if 
+			else {
+				System.out.println("Sorry, this choice is invalid. Please try again.");
+				//System.exit(0);
+			} //end else
+		} //end while
+		
+		input.close();
+	} //end public static void main
 
 	
 	//method to search for a recipe in the array
@@ -269,9 +260,6 @@ public class Main {
 	    	} //end else
 	    }
 		return null;
-		//end for
 	 } //end searchRecipe
-	
-
 
 }
