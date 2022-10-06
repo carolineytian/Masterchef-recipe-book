@@ -158,7 +158,7 @@ public class Main {
 		
 		Scanner input = new Scanner(System.in); 
 		
-		while (option != 4) {
+		while (option != 5) {
 			System.out.println("Select one option from the menu: \n"
 					+ "[1] 📖 View your ENTIRE Recipe Book \n"
 					+ "[2] 🍝 Add recipe(s) to your Recipe Book \n"
@@ -232,6 +232,10 @@ public class Main {
 					} //end else
 				} //end while
 			} //end else if 
+			else if (option == 4) {
+				System.out.println("Thank you for using the Masterchef Recipe Book!");
+				break;
+			} //end else if
 			else {
 				System.out.println("Sorry, this choice is invalid. Please try again.");
 				//System.exit(0);
