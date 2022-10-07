@@ -253,17 +253,41 @@ public class Main {
 		
 		System.out.println("Enter the name of the recipe: ");
 		recipeName = input.nextLine().toLowerCase();
+		
 		for (int i = 0; i < mainBook.size(); i++) {
 			//look through every index of the array to find the matched recipe name
 	    	if (mainBook.get(i).getName().toLowerCase().contains(recipeName)) {
-	    		System.out.println("The recipe was found! Here it is: ");
-	    		return mainBook.get(i);
-	   		} //end if
+	    		System.out.println("The recipe " + recipeName + " was found!");
+
+	    		int explorationChoice = 0;
+	    		while (explorationChoice != 3) {
+		    		System.out.println("Would you like to \n"
+		    				+ "1. Read the entire recipe (including the description, ingredients, and instructions) \n"
+		    				+ "2. Step through the instructions one at a time");
+		    		System.out.println("Enter your choice: ");
+		    		explorationChoice = input.nextInt();
+		    		if (explorationChoice == 1) {
+		    			return mainBook.get(i);
+		    		} //end if
+		    		else if (explorationChoice == 2) {
+		    			//return mainBook.get(i).getInstructions();
+		    			break;
+		    		} //end else if
+		    		else if (explorationChoice == 3) {
+		    			System.out.println("Returning to main option menu dashboard.");
+		    			break;
+		    		} //end else if
+		    		else {
+		    			System.out.println("Sorry, this choice is invalid. Please try again.");
+		    		} //end else
+	    		} //end while
+	    	} //end if
 	    	else if (i == mainBook.size() - 1) {
 	    		System.out.println("Sorry, the recipe with that name was not found.");
 	    	} //end else
 	    }
 		return null;
+		//end for
 	 } //end searchRecipe
 
 }
