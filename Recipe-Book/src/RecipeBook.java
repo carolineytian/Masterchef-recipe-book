@@ -13,17 +13,32 @@ public class RecipeBook extends ArrayList<Recipe> implements Serializable {
 	
 	public void addRecipe(Recipe r) {
 		this.add(r); 
-		saveToDisk(r);
 	}
 	
 	public void saveToDisk(Recipe r){
-        try{
+            {
             Path currentRelativePath = Paths.get("");
             String s = currentRelativePath.toAbsolutePath().toString();
-            Files.write(Paths.get(s+"/Data.txt"),(""+r).getBytes(), APPEND);
-
-        } catch(IOException e){
-            System.out.println(toString());
-        }
+            BufferedWriter writer = null;
+            try
+                {
+                writer = new BufferedWriter( new FileWriter(s+"/Recipe-Book/src/Data.txt",true));
+                writer.write(""+r);
+                }
+            catch ( IOException e)
+                {
+                }
+            finally
+            {
+                try
+                    {
+                    if ( writer != null)
+                    writer.close( );
+                }
+                catch ( IOException e)
+                    {
+                }
+            }
+    }
     }
 }

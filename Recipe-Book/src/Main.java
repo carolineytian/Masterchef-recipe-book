@@ -5,7 +5,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ResourceBundle.Control;
 import java.util.*;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 
 // class for commandline user interaction
@@ -64,7 +69,7 @@ public class Main {
 		return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions); 
 	} //initializeRecipe2
 	
-	public static Recipe initializeRecipe3() {
+	public static Recipe initializeRecipe3()  { //this is not running 
 		// from https://www.allrecipes.com/recipe/46982/pesto-pasta-with-chicken/
 		ArrayList<String> ingredients = new ArrayList<String>(){
 			{
@@ -115,7 +120,7 @@ public class Main {
 		while (keepGoing) {
 			System.out.println("Enter " + type + " " + i + ": ");
 			input = sc.nextLine(); 
-			System.out.println(input);
+			//deleted print input to prevent from printing twice 
 			if (input != "") {
 				output.add(input); 
 				i++; 
@@ -129,7 +134,7 @@ public class Main {
 	} //end askingUser
 
 	
-	public static Recipe usersNewRecipe() {
+	public static Recipe usersNewRecipe() { 
 		// Using Tiffany's logic from previous implementation, with a slight update to allow for re-usability and minimize opportunity for error. 
 		
 		Scanner sc = new Scanner(System.in);
@@ -145,12 +150,38 @@ public class Main {
 		ArrayList<String>ingredients = askingUser(sc, "ingredient"); 
 		ArrayList<String> instructions = askingUser(sc, "instruction"); 
 
+		RecipeBook rb = new RecipeBook();
+		rb.addRecipe(new Recipe (recipeName, recipeDescription, ingredients, instructions));
 		return new Recipe (recipeName, recipeDescription, ingredients, instructions); 
 	}
 
 
-	public static void main(String[] args) {
-		RecipeBook mainBook = initializeRecipeBook();
+	public static void main(String[] args) throws FileNotFoundException {
+
+		RecipeBook mainBook = new RecipeBook();
+		//read Recipe 
+		Path currentRelativePath1 = Paths.get("");
+        String s1 = currentRelativePath1.toAbsolutePath().toString();
+		try{
+			System.out.println(s1);
+			FileInputStream fis = new FileInputStream(s1+"/Recipe-Book/src/Data.txt");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			mainBook = (RecipeBook) ois.readObject();  
+			System.out.println(mainBook);
+			fis.close();
+			ois.close();
+
+			
+		}catch(IOException e){
+
+		}catch(ClassNotFoundException cl){
+
+		}
+		finally
+		{
+		}
+		
+		//mainBook = initializeRecipeBook(); //run to set dummies, if not closed properly, need to reset 
 		
 		//initialize variable
 		int option = 0;
@@ -168,19 +199,103 @@ public class Main {
 			option = input.nextInt();
 		
 			if (option == 1) {
-			  System.out.println(mainBook);
+			int o=1;
+			while(o==1){
+				//change the string 
+				for (int i = 0; i < mainBook.size(); i++) {
+					System.out.println((i+1)+ ":" + mainBook.get(i).getName());
+				}
+				System.out.println("Select one recipe or enter 100 to go back to the main menu"); //can change this to enter instead of 100 
+				Scanner sc = new Scanner(System.in);
+				int recipeNum = sc.nextInt();
+				//if input 100, exit 
+				if(recipeNum==100){
+					break;
+				} else {
+					//Options to see all or instructions step-by-step
+					if(recipeNum<=mainBook.size()) {
+						System.out.println("1. See all information for one recipe");
+						System.out.println("2. See instructions step-by-step for one recipe");
+						int selectNum = sc.nextInt();
+						if(selectNum == 1) {
+							System.out.println(mainBook.get(recipeNum-1));
+						} else if(selectNum == 2) {
+							ArrayList<String> instructions = mainBook.get(recipeNum-1).getInstructions();
+							for (int i = 0; i < instructions.size(); i++) {
+								System.out.println((i+1) + ":" + instructions.get(i));
+								if(i+1==instructions.size()) {
+									System.out.println("This is the end of the recipe!");
+								} else {
+									System.out.print("Enter to go to the next instruction");
+								}
+								if (i == 0) {
+									sc.nextLine();
+								} //clears the buffer 
+								String nextinstruction= sc.nextLine();
+									if(nextinstruction.isEmpty()){
+										System.out.println();
+										continue;
+										} else{
+										System.out.println("You should enter to go to the next instruction");
+									}
+							}
+						} else{
+							System.out.println("Enter a valid option");
+						}
+						
+					} else{
+						System.out.println("You need to choose the number that is on the recipe list");
+						continue;
+					}
+					
+				}
+				
+				//Type anything to go back but we can use another command here
+				System.out.println("Type anything to go back to recipe list");
+				String typeAnything = sc.next();
+			}
+		
 			} //end if
 			else if (option == 2) {
-			  Scanner sc = new Scanner(System.in);
-			  String more = "";
+			Scanner sc = new Scanner(System.in);
+			String more = "";
 			
-	          Boolean keepAdding = true;
-	          while (keepAdding) {
+	        Boolean keepAdding = true;
+	        while (keepAdding) {
 	        	Recipe newRecipe = usersNewRecipe(); 
-	        	mainBook.add(newRecipe); 
-	        	 System.out.println("Would you like to add a new recipe? Y/N?");
-	        	 more = sc.next();
-	        	 if (more.equalsIgnoreCase("n")) {
+				mainBook.add(newRecipe);
+
+			// will delete this once we check write and read to disk, please leave it for now 
+			// Path currentRelativePath = Paths.get("");
+            // String s = currentRelativePath.toAbsolutePath().toString();
+            // BufferedWriter writer = null;
+            // try
+            // {
+			// 	FileOutputStream fos = new FileOutputStream(s+"/Recipe-Book/src/Data.txt",true);
+			// 	ObjectOutputStream oos = new ObjectOutputStream(fos);
+			// 	oos.writeObject(mainBook);
+			// 	oos.close();
+            // }
+            // catch ( IOException e)
+            // {
+            // }
+            // finally
+            // {
+            //     try
+            //     {
+            //         if ( writer != null)
+            //         writer.close( );
+            //     }
+            //     catch ( IOException e)
+            //     {
+            //     }
+            // }
+
+
+
+	        	System.out.println("Would you like to add a new recipe? Y/N?");
+	        	more = sc.next();
+	        	if (more.equalsIgnoreCase("n")) {
 	        		keepAdding = false;
 	        	 } //end if
 	          } //end while
@@ -242,11 +357,36 @@ public class Main {
 			} //end else
 		} //end while
 		
+		//write to disk
+		Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            BufferedWriter writer = null;
+            try
+            {
+				FileOutputStream fos = new FileOutputStream(s+"/Recipe-Book/src/Data.txt",false);
+				ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(mainBook);
+				oos.close();
+            }
+            catch ( IOException e )
+            {
+            }
+            finally
+            {
+                try
+                {
+                    if ( writer != null)
+                    writer.close( );
+                }
+                catch ( IOException e )
+                {
+                }
+            }
 		input.close();
 	} //end public static void main
 
 	
-	//method to search for a recipe in the array
+	//method to search for a recipe in the array 
 	public static Recipe  searchRecipe(String recipeName, RecipeBook mainBook) {
 		
 		Scanner input = new Scanner(System.in);

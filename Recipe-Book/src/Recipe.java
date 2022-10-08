@@ -40,7 +40,6 @@ public class Recipe implements Serializable {
 		this.description = description;
 	}
 
-
 	public ArrayList<String> getIngredients() {
 		return ingredients;
 	}
@@ -59,8 +58,7 @@ public class Recipe implements Serializable {
 		String output = " ";
 		output += "\n";
 		output += "Recipe Name: " + this.name + "\n"; 
-		output += "Recipe Description: " + this.description + "\n";
-		
+		output += "Recipe Description: " + this.description + "\n";		
 		output += "Recipe Ingredients: "+ "\n";
 		//put ingredients in a vertical list
 		for (int i = 0; i < ingredients.size(); i++) {
