@@ -420,6 +420,26 @@ public class Main {
 						return mainBook.get(i);
 					} //end if
 					else if (explorationChoice == 2) {
+
+						System.out.println("Before we get to step by step instructions, some people prefer to prepare ingredients first.");
+		    			System.out.println("Would you like to view the ingredients? (Please enter Y for yes and N for No)");
+		    			System.out.print("Enter your choice: ");
+		    			input.nextLine();
+		    			String ingredientsYesNo = input.nextLine().toLowerCase();
+		    			
+		    			if (ingredientsYesNo.equals("y")) {
+		    				System.out.println("Here are the ingredients: ");
+		    				ArrayList<String> ingredients = mainBook.get(i).getIngredients();
+		    				for (int ingredientNum = 0; ingredientNum < ingredients.size(); ingredientNum++) {
+			    				System.out.println(ingredients.get(ingredientNum));
+		    				} //end for
+		    				System.out.println("\nYou have viewed all the ingredients. Now continuing to step by step instructions! \n");
+		    			} //end if
+		    			else if (ingredientsYesNo.equals("n")) {
+		    				System.out.println("Continuing to step by step instructions! \n");
+		    				continue;
+		    			} //end else if
+
 						ArrayList<String> instructions = mainBook.get(i).getInstructions();
 						
 						for (int j = 0; j < instructions.size(); j++) {
