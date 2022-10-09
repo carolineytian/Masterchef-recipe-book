@@ -60,8 +60,19 @@ public class RecipeBook extends ArrayList<Recipe> implements Serializable  {
                     {
                 }
             }
-    }
-    }
+            }
+	}
+	
+	public String toString() {
+		String output = "";
+		for (Recipe r : this) {
+			output += "\n";
+			output += r.toString();
+		}
+		
+		return output; 
+		
+	}
 
 
 

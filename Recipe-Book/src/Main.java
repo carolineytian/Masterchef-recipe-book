@@ -198,7 +198,7 @@ public class Main {
 					+ "[4] ✌️ Exit out of MasterChef");
 			
 			option = input.nextInt();
-		
+			System.out.println("\f");
 			if (option == 1) {
 			int o=1;
 			while(o==1){
@@ -314,7 +314,7 @@ public class Main {
 				
 					System.out.println("Would you like to ");
 					System.out.println("1: Search by recipe name");
-					System.out.println("2: Browse all recipes");
+					System.out.println("2: Browse recipes (sort by...)");
 					System.out.println("3: Quit");
 					System.out.print("Enter an option: ");
 					
@@ -332,13 +332,13 @@ public class Main {
 					} //end if
 			
 					else if (optionSearchBrowse == 2) {
-						System.out.println("How would you like to browse your recipes?");
+						System.out.println("How would you like to sort your recipes?");
 						Scanner howToBrowse = new Scanner(System.in); 
 						System.out.println("1: In alphabetical order");
 						int sortBy = howToBrowse.nextInt(); 
 						
 						if (sortBy == 1) {
-							RecipeBook sorted = mainBook.sortedBook("alpha");
+							RecipeBook sorted = mainBook.sortedBook("alpha"); // correctly sorted!!!!
 							System.out.println(sorted.toString());
 						}
 						
