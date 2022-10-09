@@ -198,7 +198,7 @@ public class Main {
 					+ "[4] ✌️ Exit out of MasterChef");
 			
 			option = input.nextInt();
-			System.out.println("\f");
+			
 			if (option == 1) {
 			int o=1;
 			while(o==1){
