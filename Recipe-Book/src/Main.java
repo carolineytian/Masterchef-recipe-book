@@ -398,7 +398,7 @@ public class Main {
 	
 	//method to search for a recipe in the array 
 	public static Recipe  searchRecipe(String recipeName, RecipeBook mainBook) {
-		
+			
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Enter the name of the recipe: ");
@@ -406,38 +406,62 @@ public class Main {
 		
 		for (int i = 0; i < mainBook.size(); i++) {
 			//look through every index of the array to find the matched recipe name
-	    	if (mainBook.get(i).getName().toLowerCase().contains(recipeName)) {
-	    		System.out.println("The recipe " + recipeName + " was found!");
+			if (mainBook.get(i).getName().toLowerCase().contains(recipeName)) {
+				System.out.println("The recipe " + recipeName + " was found!");
 
-	    		int explorationChoice = 0;
-	    		while (explorationChoice != 3) {
-		    		System.out.println("Would you like to \n"
-		    				+ "1. Read the entire recipe (including the description, ingredients, and instructions) \n"
-		    				+ "2. Step through the instructions one at a time");
-		    		System.out.println("Enter your choice: ");
-		    		explorationChoice = input.nextInt();
-		    		if (explorationChoice == 1) {
-		    			return mainBook.get(i);
-		    		} //end if
-		    		else if (explorationChoice == 2) {
-		    			//return mainBook.get(i).getInstructions();
-		    			break;
-		    		} //end else if
-		    		else if (explorationChoice == 3) {
-		    			System.out.println("Returning to main option menu dashboard.");
-		    			break;
-		    		} //end else if
-		    		else {
-		    			System.out.println("Sorry, this choice is invalid. Please try again.");
-		    		} //end else
-	    		} //end while
-	    	} //end if
-	    	else if (i == mainBook.size() - 1) {
-	    		System.out.println("Sorry, the recipe with that name was not found.");
-	    	} //end else
-	    }
+				int explorationChoice = 0;
+				while (explorationChoice != 3) {
+					System.out.println("Would you like to \n"
+							+ "1. Read the entire recipe (including the description, ingredients, and instructions) \n"
+							+ "2. Step through the instructions one at a time");
+					System.out.println("Enter your choice: ");
+					explorationChoice = input.nextInt();
+					if (explorationChoice == 1) {
+						return mainBook.get(i);
+					} //end if
+					else if (explorationChoice == 2) {
+						ArrayList<String> instructions = mainBook.get(i).getInstructions();
+						
+						for (int j = 0; j < instructions.size(); j++) {
+							System.out.println("Step " + (j+1) + ": " + instructions.get(j));
+							if(j+1 == instructions.size()) {
+								System.out.println("This is the end of the recipe!");
+							} //end if
+							else {
+								System.out.print("Press ENTER to go to the next instruction step");
+							} //end else
+							
+							if (j == 0) {
+								input.nextLine();
+							} //clears the buffer 
+							
+							String nextInstructionStep = input.nextLine();			
+							if(nextInstructionStep.isEmpty()) {
+								System.out.println();
+								continue;
+							} //end if
+							else {
+								System.out.println("Press ENTER to go to the next instruction step");
+							} //end else
+						} //end for
+						System.out.println("You have completed the recipe - returning to main option menu dashboard now!");
+						break;
+					} //end else if
+					else if (explorationChoice == 3) {
+						System.out.println("Returning to main option menu dashboard.");
+						break;
+					} //end else if
+					else {
+						System.out.println("Sorry, this choice is invalid. Please try again.");
+					} //end else
+				} //end while
+			} //end if
+			else if (i == mainBook.size() - 1) {
+				System.out.println("Sorry, the recipe with that name was not found.");
+			} //end else
+		}
 		return null;
 		//end for
-	 } //end searchRecipe
+	} //end searchRecipe
 
 }
