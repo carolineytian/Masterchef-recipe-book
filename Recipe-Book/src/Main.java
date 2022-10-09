@@ -157,8 +157,9 @@ public class Main {
 
 
 	public static void main(String[] args) throws FileNotFoundException {
+		
 
-		RecipeBook mainBook = new RecipeBook();
+		RecipeBook mainBook = initializeRecipeBook(); 
 		//read Recipe 
 		Path currentRelativePath1 = Paths.get("");
         String s1 = currentRelativePath1.toAbsolutePath().toString();
@@ -193,7 +194,7 @@ public class Main {
 			System.out.println("Select one option from the menu: \n"
 					+ "[1] 📖 View your ENTIRE Recipe Book \n"
 					+ "[2] 🍝 Add recipe(s) to your Recipe Book \n"
-					+ "[3] 🕶 Retrieve recipes by browsing or searching. \n"
+					+ "[3] 🕶 Retrieve recipes by browsing (filtering) or searching. \n"
 					+ "[4] ✌️ Exit out of MasterChef");
 			
 			option = input.nextInt();
@@ -331,9 +332,18 @@ public class Main {
 					} //end if
 			
 					else if (optionSearchBrowse == 2) {
-						System.out.println("Enter the name of the recipe: ");
-						recipeName = input.nextLine();
-						//browseRecipe(recipeName, mainBook);
+						System.out.println("How would you like to browse your recipes?");
+						Scanner howToBrowse = new Scanner(System.in); 
+						System.out.println("1: In alphabetical order");
+						int sortBy = howToBrowse.nextInt(); 
+						
+						if (sortBy == 1) {
+							RecipeBook sorted = mainBook.sortedBook("alpha");
+							System.out.println(sorted.toString());
+						}
+						
+					
+
 						break;
 					} //end else if
 					

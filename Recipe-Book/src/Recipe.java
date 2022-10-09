@@ -1,7 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Recipe implements Serializable {
+
+public class Recipe implements Serializable{
 
 	String name; 
 	String description; 
@@ -73,5 +74,6 @@ public class Recipe implements Serializable {
 		return output;
 
     }
-	
+
+		
 }
