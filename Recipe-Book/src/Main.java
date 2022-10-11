@@ -107,6 +107,55 @@ public class Main {
 	
 	// ---------------------------------------------------------------------------------------------------------------------------------
 	
+	//method for search recipe in the recipe list 
+	public static void BrowseRecipe(int recipeNumber,RecipeBook mainbook){
+		RecipeBook mainBook = mainbook;
+		int recipeNum = recipeNumber;
+		Scanner sc = new Scanner(System.in);
+			//Options to see all or instructions step-by-step
+			if(recipeNum<=mainBook.size()) {
+				System.out.println("1. See all information for one recipe");
+				System.out.println("2. See instructions step-by-step for one recipe");
+				int selectNum = sc.nextInt();
+				if(selectNum == 1) {
+					System.out.println(mainBook.get(recipeNum-1));
+				} else if(selectNum == 2) {
+					ArrayList<String> instructions = mainBook.get(recipeNum-1).getInstructions();
+					for (int i = 0; i < instructions.size(); i++) {
+						System.out.println((i+1) + ":" + instructions.get(i));
+						if(i+1==instructions.size()) {
+							System.out.println("This is the end of the recipe!");
+						} else {
+							System.out.print("Enter to go to the next instruction");
+						}
+						if (i == 0) {
+							sc.nextLine();
+						} //clears the buffer 
+						String nextinstruction= sc.nextLine();
+							if(nextinstruction.isEmpty()){
+								System.out.println();
+								continue;
+								} else{
+								System.out.println("You should enter to go to the next instruction");
+							}
+					}
+				} else{
+					System.out.println("Enter a valid option");
+				}
+				
+			} else{
+				System.out.println("You need to choose the number that is on the recipe list");
+				//continue;
+			}
+			
+
+		
+		//Type anything to go back but we can use another command here
+		System.out.println("Type anything to go back to recipe list");
+		String typeAnything = sc.next();
+		}
+	
+
 	public static ArrayList<String> askingUser(Scanner sc, String type) {
 		
 		System.out.println("Input your " + type + "s, " 
@@ -212,51 +261,12 @@ public class Main {
 				//if input 100, exit 
 				if(recipeNum==100){
 					break;
-				} else {
-					//Options to see all or instructions step-by-step
-					if(recipeNum<=mainBook.size()) {
-						System.out.println("1. See all information for one recipe");
-						System.out.println("2. See instructions step-by-step for one recipe");
-						int selectNum = sc.nextInt();
-						if(selectNum == 1) {
-							System.out.println(mainBook.get(recipeNum-1));
-						} else if(selectNum == 2) {
-							ArrayList<String> instructions = mainBook.get(recipeNum-1).getInstructions();
-							for (int i = 0; i < instructions.size(); i++) {
-								System.out.println((i+1) + ":" + instructions.get(i));
-								if(i+1==instructions.size()) {
-									System.out.println("This is the end of the recipe!");
-								} else {
-									System.out.print("Enter to go to the next instruction");
-								}
-								if (i == 0) {
-									sc.nextLine();
-								} //clears the buffer 
-								String nextinstruction= sc.nextLine();
-									if(nextinstruction.isEmpty()){
-										System.out.println();
-										continue;
-										} else{
-										System.out.println("You should enter to go to the next instruction");
-									}
-							}
-						} else{
-							System.out.println("Enter a valid option");
-						}
-						
-					} else{
-						System.out.println("You need to choose the number that is on the recipe list");
-						continue;
-					}
-					
+				} else{
+					BrowseRecipe(recipeNum, mainBook);
 				}
-				
-				//Type anything to go back but we can use another command here
-				System.out.println("Type anything to go back to recipe list");
-				String typeAnything = sc.next();
 			}
 		
-			} //end if
+				} //end if
 			else if (option == 2) {
 			Scanner sc = new Scanner(System.in);
 			String more = "";
@@ -406,7 +416,7 @@ public class Main {
 		
 		for (int i = 0; i < mainBook.size(); i++) {
 			//look through every index of the array to find the matched recipe name
-			if (mainBook.get(i).getName().toLowerCase().contains(recipeName)) {
+			if (mainBook.get(i).getName().toLowerCase().equals(recipeName)) {
 				System.out.println("The recipe " + recipeName + " was found!");
 
 				int explorationChoice = 0;
