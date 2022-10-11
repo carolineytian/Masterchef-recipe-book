@@ -350,6 +350,11 @@ public class Main {
 						if (sortBy == 1) {
 							RecipeBook sorted = mainBook.sortedBook("alpha"); // correctly sorted!!!!
 							System.out.println(sorted.toString());
+
+							//I added this because it just automatically showed the main menu 
+							Scanner sc = new Scanner(System.in);
+							System.out.println("Type anything to go back to recipe list");
+							String typeAnything = sc.next();
 						}
 						
 					
