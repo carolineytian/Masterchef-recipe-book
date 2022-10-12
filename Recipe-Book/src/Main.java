@@ -38,8 +38,8 @@ public class Main {
 				add("ENJOY!");
 			}
 		};
-		double cost = 15.00;
-		return new Recipe("Brigadeiros", "Yummy and simple Brazilian dessert.", ingredients, instructions, cost); 
+		int time = 50;
+		return new Recipe("Brigadeiros", "Yummy and simple Brazilian dessert.", ingredients, instructions, time); 
 	} //initializeRecipe1
 	
 	public static Recipe initializeRecipe2() {
@@ -67,8 +67,8 @@ public class Main {
 				 		+ "Place the cooked tortilla in a tortilla warmer; continue rolling and cooking the remaining dough.");
 			}
 		};
-		double cost = 10.00;
-		return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions, cost); 
+		int time = 75;
+		return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions, time); 
 	} //initializeRecipe2
 	
 	public static Recipe initializeRecipe3()  { //this is not running 
@@ -92,8 +92,8 @@ public class Main {
 				add("Combine pasta, chicken, pesto, and sun-dried tomatoes in a large bowl; toss to coat evenly.");
 			}
 		};
-		double cost = 9.00;
-		return new Recipe("Test", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions, cost); 
+		int time = 30;
+		return new Recipe("Test", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions, time); 
 	} //end initializeRecipe3
 
 	public static RecipeBook initializeRecipeBook() {
@@ -204,10 +204,13 @@ public class Main {
 		
 		ArrayList<String>ingredients = askingUser(sc, "ingredient"); 
 		ArrayList<String> instructions = askingUser(sc, "instruction"); 
+		
+		System.out.println("Recipe Time: ");
+		int recipeTime = sc.nextInt();
 
 		RecipeBook rb = new RecipeBook();
-		rb.addRecipe(new Recipe (recipeName, recipeDescription, ingredients, instructions));
-		return new Recipe (recipeName, recipeDescription, ingredients, instructions); 
+		rb.addRecipe(new Recipe (recipeName, recipeDescription, ingredients, instructions, recipeTime));
+		return new Recipe (recipeName, recipeDescription, ingredients, instructions, recipeTime); 
 	}
 
 
@@ -350,6 +353,7 @@ public class Main {
 						System.out.println("How would you like to sort your recipes?");
 						Scanner howToBrowse = new Scanner(System.in); 
 						System.out.println("1: In alphabetical order");
+						System.out.println("2: By time to complete recipe");
 						int sortBy = howToBrowse.nextInt(); 
 						
 						if (sortBy == 1) {
@@ -361,7 +365,29 @@ public class Main {
 							System.out.println("Type anything to go back");
 							String typeAnything = sc.next();
 						} //end if
+						//break;
+						
+						if (sortBy == 2) {
+							//RecipeBook sorted = mainBook.sortedBook("alpha");
+							//System.out.println(sorted.toString());
+							
+							System.out.println("The sorted recipes by time are: ");
+							sortRecipeTime(mainBook);
+							
+							for (int i = 0; i < mainBook.size(); i++) {
+								if (!(mainBook.get(i).getName().equals(""))) {
+									mainBook.get(i).getName().toString();
+								} //end if
+							} //end for
+
+							//Returns to the main menu
+							Scanner sc = new Scanner(System.in);
+							System.out.println("Type anything to go back");
+							String typeAnything = sc.next();
+						} //end if
 						break;
+						
+						
 					} //end else if
 					
 					else if (optionSearchBrowse == 3) {
@@ -414,7 +440,7 @@ public class Main {
 
 	
 	//method to search for a recipe in the array 
-	public static Recipe  searchRecipe(String recipeName, RecipeBook mainBook) {
+	public static Recipe searchRecipe(String recipeName, RecipeBook mainBook) {
 			
 		Scanner input = new Scanner(System.in);
 		
@@ -500,5 +526,30 @@ public class Main {
 		} //end for
 		return null;
 	} //end searchRecipe
+	
+	
+	//method to sort the recipe time from lowest to highest
+	public static void sortRecipeTime(RecipeBook mainBook) {
+		for (int i = 0; i < (mainBook.size()-1); i++) {
+			String minTimeName = mainBook.get(i).getName();
+			int minTime = mainBook.get(i).getTime();
+			int currentMinIndex = i;
+			for (int j = i+1; j < mainBook.size(); j++) {
+				if (minTime > mainBook.get(j).getTime()) {
+					minTimeName = mainBook.get(j).getName();
+					minTime = mainBook.get(j).getTime();
+					currentMinIndex = j;
+				} //end if
+			} //end for j
+				
+			if (currentMinIndex != i) {
+				mainBook.get(currentMinIndex).setName(mainBook.get(i).getName());
+				mainBook.get(i).setName(minTimeName);
+				mainBook.get(currentMinIndex).setTime(mainBook.get(i).getTime());
+				mainBook.get(i).setTime(minTime);
+			}//end if
+			
+		} //end for
+	} //end sortRecipeTime
 
 } //end public class Main
