@@ -9,14 +9,14 @@ public class Recipe implements Serializable{
 	String description; 
 	ArrayList<String> ingredients;
 	ArrayList<String> instructions;
-	double cost;
+	int time;
 	
-	public Recipe(String name, String description, ArrayList<String> ingredients, ArrayList<String> instructions, double cost) {
+	public Recipe(String name, String description, ArrayList<String> ingredients, ArrayList<String> instructions, int time) {
 		this.name = name;
 		this.description = description;
 		this.ingredients = ingredients;
 		this.instructions = instructions;
-		this.cost = cost;
+		this.time = time;
 	} 
 	
 	// for recipe additions
@@ -58,14 +58,14 @@ public class Recipe implements Serializable{
 		return instructions;
 	}
 	
-	public void setCost(double cost) {
-    	this.cost = cost;
-    } //end setName
+	public void setTime(int time) {
+    	this.time = time;
+    } //end setTime
     
 
-    public double getCost() {
-        return cost;
-    } //end getTitle
+    public int getTime() {
+        return time;
+    } //end getTime
 	
     
 	public String toString() {
@@ -86,7 +86,7 @@ public class Recipe implements Serializable{
 			output += this.instructions.get(i) + "\n";
 		} //end for
 		
-		output += "Recipe Cost: $"+ this.cost + "\n";
+		output += "Recipe Time: "+ this.time + " minutes\n";
 		
 		return output;
 
