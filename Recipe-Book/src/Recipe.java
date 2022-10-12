@@ -9,12 +9,14 @@ public class Recipe implements Serializable{
 	String description; 
 	ArrayList<String> ingredients;
 	ArrayList<String> instructions;
+	double cost;
 	
-	public Recipe(String name, String description, ArrayList<String> ingredients, ArrayList<String> instructions) {
+	public Recipe(String name, String description, ArrayList<String> ingredients, ArrayList<String> instructions, double cost) {
 		this.name = name;
 		this.description = description;
 		this.ingredients = ingredients;
 		this.instructions = instructions;
+		this.cost = cost;
 	} 
 	
 	// for recipe additions
@@ -56,7 +58,18 @@ public class Recipe implements Serializable{
 		return instructions;
 	}
 	
+	public void setCost(double cost) {
+    	this.cost = cost;
+    } //end setName
+    
+
+    public double getCost() {
+        return cost;
+    } //end getTitle
+	
+    
 	public String toString() {
+		
 		String output = " ";
 		output += "\n";
 		output += "Recipe Name: " + this.name + "\n"; 
@@ -71,10 +84,13 @@ public class Recipe implements Serializable{
 		//put instructions in a vertical list
 		for (int i = 0; i < instructions.size(); i++) {
 			output += this.instructions.get(i) + "\n";
-		}		
+		} //end for
+		
+		output += "Recipe Cost: $"+ this.cost + "\n";
+		
 		return output;
 
-    }
+    } //end toString
 
 		
-}
+} //end public class Recipe

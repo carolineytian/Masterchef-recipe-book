@@ -38,7 +38,8 @@ public class Main {
 				add("ENJOY!");
 			}
 		};
-		return new Recipe("Brigadeiros", "Yummy and simple Brazilian dessert.", ingredients, instructions); 
+		double cost = 15.00;
+		return new Recipe("Brigadeiros", "Yummy and simple Brazilian dessert.", ingredients, instructions, cost); 
 	} //initializeRecipe1
 	
 	public static Recipe initializeRecipe2() {
@@ -66,7 +67,8 @@ public class Main {
 				 		+ "Place the cooked tortilla in a tortilla warmer; continue rolling and cooking the remaining dough.");
 			}
 		};
-		return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions); 
+		double cost = 10.00;
+		return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions, cost); 
 	} //initializeRecipe2
 	
 	public static Recipe initializeRecipe3()  { //this is not running 
@@ -90,9 +92,10 @@ public class Main {
 				add("Combine pasta, chicken, pesto, and sun-dried tomatoes in a large bowl; toss to coat evenly.");
 			}
 		};
-		return new Recipe("Test", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions); 
+		double cost = 9.00;
+		return new Recipe("Test", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions, cost); 
 	} //end initializeRecipe3
-	
+
 	public static RecipeBook initializeRecipeBook() {
 		RecipeBook rb = new RecipeBook() {
 			{
@@ -108,26 +111,30 @@ public class Main {
 	// ---------------------------------------------------------------------------------------------------------------------------------
 	
 	//method for search recipe in the recipe list 
-	public static void BrowseRecipe(int recipeNumber,RecipeBook mainbook){
+	public static void BrowseRecipe(int recipeNumber,RecipeBook mainbook) {
+
 		RecipeBook mainBook = mainbook;
 		int recipeNum = recipeNumber;
 		Scanner sc = new Scanner(System.in);
+
 			//Options to see all or instructions step-by-step
-			if(recipeNum<=mainBook.size()) {
+			if (recipeNum <= mainBook.size()) {
 				System.out.println("1. See all information for one recipe");
 				System.out.println("2. See instructions step-by-step for one recipe");
 				int selectNum = sc.nextInt();
-				if(selectNum == 1) {
+				if (selectNum == 1) {
 					System.out.println(mainBook.get(recipeNum-1));
-				} else if(selectNum == 2) {
+				} //end if
+				else if (selectNum == 2) {
 					ArrayList<String> instructions = mainBook.get(recipeNum-1).getInstructions();
 					for (int i = 0; i < instructions.size(); i++) {
 						System.out.println((i+1) + ":" + instructions.get(i));
-						if(i+1==instructions.size()) {
+						if (i+1==instructions.size()) {
 							System.out.println("This is the end of the recipe!");
-						} else {
+						} //end if
+						else {
 							System.out.print("Enter to go to the next instruction");
-						}
+						} //end else
 						if (i == 0) {
 							sc.nextLine();
 						} //clears the buffer 
@@ -135,25 +142,25 @@ public class Main {
 							if(nextinstruction.isEmpty()){
 								System.out.println();
 								continue;
-								} else{
+								} //end if
+								else {
 								System.out.println("You should enter to go to the next instruction");
-							}
-					}
-				} else{
+							} //end else
+					} //end for
+				} //end if
+				else {
 					System.out.println("Enter a valid option");
-				}
+				} //end else
 				
-			} else{
+			} //end if
+			else {
 				System.out.println("You need to choose the number that is on the recipe list");
-				//continue;
-			}
+			} //end else
 			
-
-		
-		//Type anything to go back but we can use another command here
-		System.out.println("Type anything to go back to recipe list");
-		String typeAnything = sc.next();
-		}
+			//Type anything to go back
+			System.out.println("Type anything to go back to recipe list");
+			String typeAnything = sc.next();
+		} //public static void BrowseRecipe
 	
 
 	public static ArrayList<String> askingUser(Scanner sc, String type) {
@@ -189,7 +196,6 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Creating a new recipe...");
 		
-		
 		System.out.println("Recipe Name: ");
 		
 		String recipeName = sc.nextLine();
@@ -206,13 +212,12 @@ public class Main {
 
 
 	public static void main(String[] args) throws FileNotFoundException {
-		
 
 		RecipeBook mainBook = initializeRecipeBook(); 
 		//read Recipe 
 		Path currentRelativePath1 = Paths.get("");
         String s1 = currentRelativePath1.toAbsolutePath().toString();
-		try{
+		try {
 			System.out.println(s1);
 			FileInputStream fis = new FileInputStream(s1+"/Recipe-Book/src/Data.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
@@ -222,9 +227,9 @@ public class Main {
 			ois.close();
 
 			
-		}catch(IOException e){
+		} catch(IOException e){
 
-		}catch(ClassNotFoundException cl){
+		} catch(ClassNotFoundException cl) {
 
 		}
 		finally
@@ -249,32 +254,34 @@ public class Main {
 			option = input.nextInt();
 			
 			if (option == 1) {
-			int o=1;
-			while(o==1){
-				//change the string 
-				for (int i = 0; i < mainBook.size(); i++) {
-					System.out.println((i+1)+ ":" + mainBook.get(i).getName());
-				}
-				System.out.println("Select one recipe or enter 100 to go back to the main menu"); //can change this to enter instead of 100 
-				Scanner sc = new Scanner(System.in);
-				int recipeNum = sc.nextInt();
-				//if input 100, exit 
-				if(recipeNum==100){
-					break;
-				} else{
-					BrowseRecipe(recipeNum, mainBook);
-				}
-			}
-		
-				} //end if
+				int o = 1;
+				while(o == 1) {
+					//change the string 
+					for (int i = 0; i < mainBook.size(); i++) {
+						System.out.println((i+1)+ ":" + mainBook.get(i).getName());
+					} //end for
+					System.out.println("Select one recipe or enter 100 to go back to the main menu"); //can change this to enter instead of 100 
+					
+					Scanner sc = new Scanner(System.in);
+					int recipeNum = sc.nextInt();
+					
+					//if input 100, exit 
+					if (recipeNum == 100) {
+						break;
+					} //end if
+					else {
+						BrowseRecipe(recipeNum, mainBook);
+					} //end else
+				} //end while
+			} //end if
 			else if (option == 2) {
-			Scanner sc = new Scanner(System.in);
-			String more = "";
-			
-	        Boolean keepAdding = true;
-	        while (keepAdding) {
-	        	Recipe newRecipe = usersNewRecipe(); 
-				mainBook.add(newRecipe);
+				Scanner sc = new Scanner(System.in);
+				String more = "";
+				
+				Boolean keepAdding = true;
+				while (keepAdding) {
+					Recipe newRecipe = usersNewRecipe(); 
+					mainBook.add(newRecipe);
 
 			// will delete this once we check write and read to disk, please leave it for now 
 			// Path currentRelativePath = Paths.get("");
@@ -302,14 +309,12 @@ public class Main {
             //     }
             // }
 
-
-
-	        	System.out.println("Would you like to add a new recipe? Y/N?");
-	        	more = sc.next();
-	        	if (more.equalsIgnoreCase("n")) {
-	        		keepAdding = false;
-	        	 } //end if
-	          } //end while
+					System.out.println("Would you like to add a new recipe? Y/N?");
+					more = sc.next();
+					if (more.equalsIgnoreCase("n")) {
+						keepAdding = false;
+					} //end if
+	          	} //end while
 
 			} //end else if
 			else if (option == 3) {
@@ -348,17 +353,14 @@ public class Main {
 						int sortBy = howToBrowse.nextInt(); 
 						
 						if (sortBy == 1) {
-							RecipeBook sorted = mainBook.sortedBook("alpha"); // correctly sorted!!!!
+							RecipeBook sorted = mainBook.sortedBook("alpha");
 							System.out.println(sorted.toString());
 
-							//I added this because it just automatically showed the main menu 
+							//Returns to the main menu
 							Scanner sc = new Scanner(System.in);
-							System.out.println("Type anything to go back to recipe list");
+							System.out.println("Type anything to go back");
 							String typeAnything = sc.next();
-						}
-						
-					
-
+						} //end if
 						break;
 					} //end else if
 					
@@ -488,15 +490,15 @@ public class Main {
 					} //end else if
 					else {
 						System.out.println("Sorry, this choice is invalid. Please try again.");
+						System.out.println("Try another method. Returning to main dashboard...");
 					} //end else
 				} //end while
 			} //end if
 			else if (i == mainBook.size() - 1) {
 				System.out.println("Sorry, the recipe with that name was not found.");
 			} //end else
-		}
+		} //end for
 		return null;
-		//end for
 	} //end searchRecipe
 
-}
+} //end public class Main
