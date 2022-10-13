@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 import java.io.*;
 import java.nio.file.Paths;
 import static java.nio.file.StandardOpenOption.APPEND;
@@ -38,6 +39,12 @@ public class RecipeBook extends ArrayList<Recipe> implements Serializable  {
 		
 		return output;
 		
+	}
+	
+	public Recipe getRandom() {
+		Random random = new Random(); 
+		int randomIdx = random.nextInt(this.size());
+		return this.get(randomIdx);
 	}
 	
 	public void saveToDisk(Recipe r){
