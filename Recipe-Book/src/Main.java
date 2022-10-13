@@ -370,19 +370,15 @@ public class Main {
 							for (Recipe r : sorted) {
 								System.out.println(r.name+ "  [" + r.description + "]");
 							}
-
 							//System.out.println(sorted.toString());
-							
-
-
 							//Returns to the main menu
 							Scanner sc = new Scanner(System.in);
 							System.out.println("Type anything to go back");
-							String typeAnything = sc.next();
+							String typeAnything = sc.nextLine();
 						} //end if
-						//break;
+					
 						
-						if (sortBy == 2) {
+						 else if (sortBy == 2) {
 							System.out.println("The sorted recipes by time are: ");
 							RecipeBook sorted = mainBook.sortedBook("num");
 
@@ -396,21 +392,21 @@ public class Main {
 							for (Recipe r : sorted) {
 								System.out.println(r.time + "\t\t" + r.name);
 							}
+
 							Scanner sc = new Scanner(System.in);
 							System.out.println("Type anything to go back");
-							String typeAnything = sc.next();
-				
-						} //end if
+							String typeAnything = sc.nextLine();
+
+						 } //end if
+
 						break;
-						
-						
 					} //end else if
-					
+
 					else if (optionSearchBrowse == 3) {
 						System.out.println("Leaving Recipe Book recipes page");
 						break;
 					} //end else if
-					
+
 					else {
 						System.out.println("Sorry, this choice is invalid. Please try again.");
 					} //end else
