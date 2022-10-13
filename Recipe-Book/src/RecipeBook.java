@@ -32,6 +32,10 @@ public class RecipeBook extends ArrayList<Recipe> implements Serializable  {
 			Collections.sort(output, new sortByName());
 		}
 		
+		if (sortedBy.equalsIgnoreCase("num")) {
+			Collections.sort(output, new sortByTime());
+		}
+		
 		return output;
 		
 	}

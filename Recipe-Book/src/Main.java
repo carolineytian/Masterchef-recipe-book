@@ -357,6 +357,7 @@ public class Main {
 						int sortBy = howToBrowse.nextInt(); 
 						
 						if (sortBy == 1) {
+							System.out.println("The sorted recipes by name are: ");
 							RecipeBook sorted = mainBook.sortedBook("alpha");
 							System.out.println(sorted.toString());
 
@@ -368,18 +369,9 @@ public class Main {
 						//break;
 						
 						if (sortBy == 2) {
-							//RecipeBook sorted = mainBook.sortedBook("alpha");
-							//System.out.println(sorted.toString());
-							
-							System.out.println("The sorted recipes by time are: ");
-							sortRecipeTime(mainBook);
-							
-							for (int i = 0; i < mainBook.size(); i++) {
-								if (!(mainBook.get(i).getName().equals(""))) {
-									mainBook.get(i).getName().toString();
-								} //end if
-							} //end for
-
+							System.out.println("The sorted recipes by name are: ");
+							RecipeBook sorted = mainBook.sortedBook("num");
+							System.out.println(sorted.toString());
 							//Returns to the main menu
 							Scanner sc = new Scanner(System.in);
 							System.out.println("Type anything to go back");
@@ -527,29 +519,4 @@ public class Main {
 		return null;
 	} //end searchRecipe
 	
-	
-	//method to sort the recipe time from lowest to highest
-	public static void sortRecipeTime(RecipeBook mainBook) {
-		for (int i = 0; i < (mainBook.size()-1); i++) {
-			String minTimeName = mainBook.get(i).getName();
-			int minTime = mainBook.get(i).getTime();
-			int currentMinIndex = i;
-			for (int j = i+1; j < mainBook.size(); j++) {
-				if (minTime > mainBook.get(j).getTime()) {
-					minTimeName = mainBook.get(j).getName();
-					minTime = mainBook.get(j).getTime();
-					currentMinIndex = j;
-				} //end if
-			} //end for j
-				
-			if (currentMinIndex != i) {
-				mainBook.get(currentMinIndex).setName(mainBook.get(i).getName());
-				mainBook.get(i).setName(minTimeName);
-				mainBook.get(currentMinIndex).setTime(mainBook.get(i).getTime());
-				mainBook.get(i).setTime(minTime);
-			}//end if
-			
-		} //end for
-	} //end sortRecipeTime
-
 } //end public class Main
