@@ -371,6 +371,10 @@ public class Main {
 								System.out.println(r.name+ "  [" + r.description + "]");
 							}
 
+							//System.out.println(sorted.toString());
+							
+
+
 							//Returns to the main menu
 							Scanner sc = new Scanner(System.in);
 							System.out.println("Type anything to go back");
@@ -381,14 +385,21 @@ public class Main {
 						if (sortBy == 2) {
 							System.out.println("The sorted recipes by time are: ");
 							RecipeBook sorted = mainBook.sortedBook("num");
+
 							System.out.println("Time (min) \tName"); 
 							for (Recipe r : sorted) {
 								System.out.println(r.time + "\t\t" + r.name);
 							}
+
 							//Returns to the main menu
+							System.out.println("Minutes\t\tName");
+							for (Recipe r : sorted) {
+								System.out.println(r.time + "\t\t" + r.name);
+							}
 							Scanner sc = new Scanner(System.in);
 							System.out.println("Type anything to go back");
 							String typeAnything = sc.next();
+				
 						} //end if
 						break;
 						
