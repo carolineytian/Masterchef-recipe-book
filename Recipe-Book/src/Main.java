@@ -135,7 +135,7 @@ public class Main {
 						else {
 							System.out.print("Enter to go to the next instruction");
 						} //end else
-						if (i == 0) {
+						if (i == 0) { //this is the line i added to fix the enter 
 							sc.nextLine();
 						} //clears the buffer 
 						String nextinstruction= sc.nextLine();
