@@ -472,7 +472,6 @@ public class Main {
 		    			} //end if
 		    			else if (ingredientsYesNo.equals("n")) {
 		    				System.out.println("Continuing to step by step instructions! \n");
-		    				continue;
 		    			} //end else if
 
 						ArrayList<String> instructions = mainBook.get(i).getInstructions();
