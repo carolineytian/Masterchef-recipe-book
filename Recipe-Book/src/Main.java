@@ -71,7 +71,7 @@ public class Main {
 		return new Recipe("Homemade Flour Tortillas", "Traditional flour tortillas - homemade and much better than store bought. Do not substitute vegetable oil or shortening for the lard.", ingredients, instructions, time); 
 	} //initializeRecipe2
 	
-	public static Recipe initializeRecipe3()  { //this is not running 
+	public static Recipe initializeRecipe3()  {  
 		// from https://www.allrecipes.com/recipe/46982/pesto-pasta-with-chicken/
 		ArrayList<String> ingredients = new ArrayList<String>(){
 			{
@@ -93,7 +93,7 @@ public class Main {
 			}
 		};
 		int time = 30;
-		return new Recipe("Test", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions, time); 
+		return new Recipe("Chicken Pesto Pasta", "Easy and delicious. Serve with crusty bread and salad for dinner.", ingredients, instructions, time); 
 	} //end initializeRecipe3
 
 	public static RecipeBook initializeRecipeBook() {
@@ -259,7 +259,8 @@ public class Main {
 					+ "[1] 📖 View your ENTIRE Recipe Book \n"
 					+ "[2] 🍝 Add recipe(s) to your Recipe Book \n"
 					+ "[3] 🕶 Retrieve recipes by browsing (filtering) or searching. \n"
-					+ "[4] ✌️ Exit out of MasterChef");
+					+ "[4] 🎲 Find inspiration from a random recipe \n"
+					+ "[5] ✌️ Exit out of MasterChef");
 			
 			option = input.nextInt();
 			
@@ -366,7 +367,9 @@ public class Main {
 						if (sortBy == 1) {
 							System.out.println("The sorted recipes by name are: ");
 							RecipeBook sorted = mainBook.sortedBook("alpha");
-							System.out.println(sorted.toString());
+							for (Recipe r : sorted) {
+								System.out.println(r.name+ "  [" + r.description + "]");
+							}
 
 							//Returns to the main menu
 							Scanner sc = new Scanner(System.in);
@@ -376,9 +379,12 @@ public class Main {
 						//break;
 						
 						if (sortBy == 2) {
-							System.out.println("The sorted recipes by name are: ");
+							System.out.println("The sorted recipes by time are: ");
 							RecipeBook sorted = mainBook.sortedBook("num");
-							System.out.println(sorted.toString());
+							System.out.println("Time (min) \tName"); 
+							for (Recipe r : sorted) {
+								System.out.println(r.time + "\t\t" + r.name);
+							}
 							//Returns to the main menu
 							Scanner sc = new Scanner(System.in);
 							System.out.println("Type anything to go back");
@@ -400,6 +406,19 @@ public class Main {
 				} //end while
 			} //end else if 
 			else if (option == 4) {
+				Recipe randomized = mainBook.getRandom();
+				System.out.println("👀 We found your random recipe. Here it is...\n");
+				System.out.println("Name:" + randomized.name);
+				System.out.println("Description:" + randomized.description);
+				System.out.println("Time (minutes): " + randomized.time);
+				
+				interaction(randomized);
+				
+				// issues with going back to main menu 
+				
+				
+			}
+			else if (option == 5) {
 				System.out.println("Thank you for using the Masterchef Recipe Book!");
 				break;
 			} //end else if
@@ -524,5 +543,73 @@ public class Main {
 		} //end for
 		return null;
 	} //end searchRecipe
+	
+	public static void interaction(Recipe r) {
+		System.out.println("Would you like to \n"
+				+ "1. Read the entire recipe (including the description, ingredients, and instructions) \n"
+				+ "2. Step through the instructions one at a time\n"
+				+ "3. Hate this recipe? Go back to main menu.");
+		System.out.println("Enter your choice: ");
+		Scanner sc = new Scanner(System.in);
+		int choice = sc.nextInt();
+		if (choice == 1) {
+			System.out.println(r.toString());
+			// should press enter to to go back to main menu, doesn't
+		} //end if
+		else if (choice == 2) {
+
+			System.out.println("Before we get to step by step instructions, some people prefer to prepare ingredients first.");
+			System.out.println("Would you like to view the ingredients? (Please enter Y for yes and N for No)");
+			System.out.print("Enter your choice: ");
+			sc.nextLine();
+			String ingredientsYesNo = sc.nextLine().toLowerCase();
+			
+			if (ingredientsYesNo.equals("y")) {
+				System.out.println("Here are the ingredients: ");
+				ArrayList<String> ingredients = r.getIngredients();
+				for (int ingredientNum = 0; ingredientNum < ingredients.size(); ingredientNum++) {
+    				System.out.println(ingredients.get(ingredientNum));
+				} //end for
+				System.out.println("\nYou have viewed all the ingredients. Now continuing to step by step instructions! \n");
+			} //end if
+			else if (ingredientsYesNo.equals("n")) {
+				System.out.println("Continuing to step by step instructions! \n");
+			} //end else if
+
+			ArrayList<String> instructions = r.getInstructions();
+			
+			for (int j = 0; j < instructions.size(); j++) {
+				System.out.println("Step " + (j+1) + ": " + instructions.get(j));
+				if(j+1 == instructions.size()) {
+					System.out.println("This is the end of the recipe!");
+				} //end if
+				else {
+					System.out.print("Press ENTER to go to the next instruction step");
+				} //end else
+				
+				if (j == 0) {
+					sc.nextLine();
+				} //clears the buffer 
+				
+				String nextInstructionStep = sc.nextLine();			
+				if(nextInstructionStep.isEmpty()) {
+					System.out.println();
+					continue;
+				} //end if
+				else {
+					System.out.println("Press ENTER to go to the next instruction step");
+				} //end else
+			} //end for
+			System.out.println("You have completed the recipe - returning to main option menu dashboard now!");
+		} //end else if
+		else if (choice == 3) {
+			System.out.println("Returning to main option menu dashboard.");
+		} //end else if
+		else {
+			System.out.println("Sorry, this choice is invalid. Please try again.");
+			System.out.println("Try another method. Returning to main dashboard...");
+		} //end else
+	} //end while
+		
 	
 } //end public class Main
