@@ -448,8 +448,8 @@ public class Main {
 		
 		for (int i = 0; i < mainBook.size(); i++) {
 			//look through every index of the array to find the matched recipe name
-			if (mainBook.get(i).getName().toLowerCase().equals(recipeName)) {
-				System.out.println("The recipe " + recipeName + " was found!");
+			if (mainBook.get(i).getName().toLowerCase().contains(recipeName)) {
+				System.out.println("The recipe " + mainBook.get(i).getName() + " was found!");
 
 				int explorationChoice = 0;
 				while (explorationChoice != 3) {
