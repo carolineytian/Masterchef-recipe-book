@@ -206,11 +206,18 @@ public class Main {
 		ArrayList<String> instructions = askingUser(sc, "instruction"); 
 		
 		System.out.println("Recipe Time: ");
-		int recipeTime = sc.nextInt();
-
-		RecipeBook rb = new RecipeBook();
-		rb.addRecipe(new Recipe (recipeName, recipeDescription, ingredients, instructions, recipeTime));
-		return new Recipe (recipeName, recipeDescription, ingredients, instructions, recipeTime); 
+		String recipeTime = sc.nextLine();
+		int time; 
+		if (recipeTime == "") {
+			time = 0; 
+		} else {
+			time = Integer.parseInt(recipeTime);
+		}
+		
+		
+		return new Recipe(recipeName, recipeDescription, ingredients, instructions, time);
+	
+		//rb.addRecipe(new Recipe (recipeName, recipeDescription, ingredients, instructions, recipeTime));
 	}
 
 
