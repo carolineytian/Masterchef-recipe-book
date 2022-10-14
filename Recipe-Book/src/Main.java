@@ -228,14 +228,13 @@ public class Main {
 		Path currentRelativePath1 = Paths.get("");
         String s1 = currentRelativePath1.toAbsolutePath().toString();
 		try {
-			System.out.println(s1);
-			FileInputStream fis = new FileInputStream(s1+"/Recipe-Book/src/Data.txt");
+			String fisPath = s1 + "/Data.txt";
+			FileInputStream fis = new FileInputStream(fisPath);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			mainBook = (RecipeBook) ois.readObject();  
-			System.out.println(mainBook);
+			//System.out.println(mainBook);
 			fis.close();
 			ois.close();
-
 			
 		} catch(IOException e){
 
@@ -441,7 +440,8 @@ public class Main {
             BufferedWriter writer = null;
             try
             {
-				FileOutputStream fos = new FileOutputStream(s+"/Recipe-Book/src/Data.txt",false);
+            	String fosPath = s+"/Data.txt"; 
+				FileOutputStream fos = new FileOutputStream(fosPath,false);
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(mainBook);
 				oos.close();
