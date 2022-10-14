@@ -11,9 +11,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-// issues - reading through entire recipe goes strait to main menu from search
-// recipes not saving in .txt
-// "type anything to go back" scanner should be reading nextLine() not next()
+
 
 // class for commandline user interaction
 //Recipe(String name, String description, ArrayList<String> ingredients, ArrayList<String> instructions)
@@ -385,6 +383,12 @@ public class Main {
 							RecipeBook sorted = mainBook.sortedBook("num");
 
 							System.out.println("Time (min) \tName"); 
+							for (Recipe r : sorted) {
+								System.out.println(r.time + "\t\t" + r.name);
+							}
+
+							//Returns to the main menu
+							System.out.println("Minutes\t\tName");
 							for (Recipe r : sorted) {
 								System.out.println(r.time + "\t\t" + r.name);
 							}
