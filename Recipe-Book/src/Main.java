@@ -381,10 +381,10 @@ public class Main {
 							System.out.println("The sorted recipes by time are: ");
 							RecipeBook sorted = mainBook.sortedBook("num");
 
-							System.out.println("Time (min) \tName"); 
-							for (Recipe r : sorted) {
-								System.out.println(r.time + "\t\t" + r.name);
-							}
+							//System.out.println("Time (min) \tName"); 
+							//for (Recipe r : sorted) {
+							//	System.out.println(r.time + "\t\t" + r.name);
+							//}
 
 							//Returns to the main menu
 							System.out.println("Minutes\t\tName");
